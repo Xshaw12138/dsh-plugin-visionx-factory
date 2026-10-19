@@ -37,6 +37,12 @@ npm pack
 dsh plugin --profile desktop add <绝对路径>\dsh-plugin-visionx-factory-<version>.tgz
 ```
 
+### 从 GitHub 安装
+
+```powershell
+dsh plugin --profile desktop add github:Xshaw12138/dsh-plugin-visionx-factory
+```
+
 ### 从 npm 安装（发布后）
 
 ```powershell
