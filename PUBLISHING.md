@@ -6,7 +6,7 @@
 
 - [ ] `package.json` 的 `license` 已确定（当前 `UNLICENSED`，公开 npm 发布前通常改为
       `MIT` 或在仓库根目录放 `LICENSE` 并改成 `SEE LICENSE IN LICENSE`）。
-- [ ] `version` 已递增（当前 `0.1.0`）。
+- [ ] `version` 已递增（当前 `0.1.1`）。
 - [ ] `node scripts/sync-upstream.mjs` 已运行，且 `skill/` 与 `presets/` 没有未提交的漂移。
 - [ ] `node test/plugin.test.mjs` 全部通过。
 - [ ] `npm pack --dry-run` 的文件列表符合预期：`lib/`、`cordis.patch.yml`、`skill/`、
@@ -18,13 +18,13 @@
 
 ```powershell
 npm pack
-# dsh-plugin-visionx-factory-0.1.0.tgz
+# dsh-plugin-visionx-factory-<version>.tgz
 ```
 
 tarball 可以直接交付给使用者：
 
 ```powershell
-dsh plugin --profile desktop add <绝对路径>\dsh-plugin-visionx-factory-0.1.0.tgz
+dsh plugin --profile desktop add <绝对路径>\dsh-plugin-visionx-factory-<version>.tgz
 ```
 
 ## 3. 发布到 npm

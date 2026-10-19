@@ -1,5 +1,7 @@
 # dsh-plugin-visionx-factory
 
+> VisionX Factory Guide for DeepSeek Harness: one install adds the `visionx-factory-simulation` skill and a matching agent preset.
+
 把 WorkBuddy 版本的「VisionX 智能工厂设计顾问」专家与 `visionx-factory-simulation`
 技能，打包成 DeepSeek Harness（DSH）的一个 Profile Bundle 插件。
 
@@ -32,7 +34,7 @@ dsh plugin --profile desktop add <本目录的绝对路径>
 npm pack
 
 # 再安装
-dsh plugin --profile desktop add <绝对路径>\dsh-plugin-visionx-factory-0.1.0.tgz
+dsh plugin --profile desktop add <绝对路径>\dsh-plugin-visionx-factory-<version>.tgz
 ```
 
 ### 从 npm 安装（发布后）
@@ -123,6 +125,9 @@ node test/plugin.test.mjs
 # 检查打包内容
 npm pack --dry-run
 ```
+
+> `scripts/sync-upstream.mjs` 是维护者脚本，要求 WorkBuddy 源码目录与本仓库同级；
+> 直接从 GitHub 克隆的使用者不需要运行它，`skill/` 与 `presets/` 已随仓库提供。
 
 源码同步映射：
 

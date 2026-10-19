@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-visionx-factory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "VisionX 智能工厂设计顾问 for DeepSeek Harness: bundles the visionx-factory-simulation skill and a matching agent preset.",
   "type": "module",
   "main": "lib/index.js",
@@ -36,6 +36,14 @@
     "agent-preset"
   ],
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xshaw12138/dsh-plugin-visionx-factory.git"
+  },
+  "homepage": "https://github.com/Xshaw12138/dsh-plugin-visionx-factory#readme",
+  "bugs": {
+    "url": "https://github.com/Xshaw12138/dsh-plugin-visionx-factory/issues"
+  },
   "scripts": {
     "sync": "node scripts/sync-upstream.mjs",
     "test": "node test/plugin.test.mjs",
