@@ -19,7 +19,8 @@
 
 ## 安装
 
-要求：DSH `0.1.1-rc.2` 或兼容版本；Node.js 22+。
+要求：DSH `0.1.1-rc.2` 或兼容版本；Node.js 22+；`pnpm`（`dsh plugin` 用它安装依赖，
+可用 `npm install -g pnpm` 或 `corepack enable` 准备）。
 
 ### 从本地目录安装（开发时）
 
