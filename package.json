@@ -1,0 +1,44 @@
+{
+  "name": "dsh-plugin-visionx-factory",
+  "version": "0.1.0",
+  "description": "VisionX 智能工厂设计顾问 for DeepSeek Harness: bundles the visionx-factory-simulation skill and a matching agent preset.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "cordis.patch.yml",
+    "skill",
+    "presets",
+    "README.md",
+    "PUBLISHING.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "visionx",
+    "factory",
+    "simulation",
+    "skill",
+    "agent-preset"
+  ],
+  "license": "UNLICENSED",
+  "scripts": {
+    "sync": "node scripts/sync-upstream.mjs",
+    "test": "node test/plugin.test.mjs",
+    "pack": "npm pack"
+  }
+}

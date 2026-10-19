@@ -1,0 +1,62 @@
+{
+  "title": "双立库与 RGV 仓储方案",
+  "isExample": true,
+  "showDownload": true,
+  "summary": "两座堆垛机立库并列布置，共用前端 RGV 轨道。入库与出库设独立交接点，RGV 沿 X 方向走行，车载输送沿 Z 方向交接。先把物流关系看清，再验证一台 RGV 是否够用。",
+  "recommendation": "两座立库并列面向同一条 RGV 轨道，入出库分设交接口，以减少固定输送线交叉。",
+  "keyRisk": "入出库高峰共享一台 RGV，当前只能确认几何连接，不能证明吞吐达标。",
+  "basis": "需求来自两个立库、RGV 搬运及入出库输送的业务描述。本例重新绘制为并列侧向交接方案，用于演示首轮交付效果，不是原对话场景的复刻或工程定案。",
+  "assumptions": [
+    "本例选用 1 台双向侧移载 RGV；车数、20m 轨道、设备尺寸与位置均为演示假设。",
+    "每座立库按 8 列 × 5 层 × 2 排 × 每格 1 托示意；列距 1.75m、层高 1.6m。实际库容需按货物外廓、载荷与净空重算。",
+    "输送及 RGV 交接标高统一假设为 0.75m；立库前端需适配该标高。托盘外廓、载荷和供应商移载结构待确认。",
+    "未取得场地净尺寸、柱位、出入口、消防及维修空间；图中留白不构成通道合规或碰撞检查结论。"
+  ],
+  "reasons": [
+    "两个立库前端面向同一轨道，T01/T02 承担固定交接；RGV 不进入堆垛机作业巷道。",
+    "C01/C02 位于轨道前侧，沿 Z 方向与车侧交接；轨道行驶箭头与托盘移载箭头分开。",
+    "共享车辆减少初始设备种类，但入出库高峰会争用同一辆车；是否足够要结合订单与装卸周期验证。"
+  ],
+  "questions": [
+    "先确认货物尺寸/重量、目标库容和入出库峰值，再确定货架与车辆配置。",
+    "补充入出库交接时间和任务比例；仅凭轨道长度、车速不能承诺系统吞吐。"
+  ],
+  "experiments": [
+    "一台 RGV 是否够用：配置入出库到达与交接时间，观察完成量、等待时间和两台堆垛机利用率。",
+    "端口是否需要缓冲：比较不同缓冲位配置，观察端口阻塞、WIP 与新增占地。",
+    "哪种调度更合适：在同一订单负载下比较先到先服务与出库优先，观察出库响应及入库积压。"
+  ],
+  "storage": [
+    {"name":"立库 A", "bays":8, "levels":5, "rows":2, "positionsPerCell":1, "rackIds":["A-R1","A-R2"], "source":"演示假设"},
+    {"name":"立库 B", "bays":8, "levels":5, "rows":2, "positionsPerCell":1, "rackIds":["B-R1","B-R2"], "source":"演示假设"}
+  ],
+  "objects": [
+    {"id":"RAIL","name":"RGV 轨道","kind":"rail","floorId":"F01","x":0,"y":0,"z":-0.65,"dx":20,"dy":0.12,"dz":1.3,"source":"演示假设"},
+    {"id":"A-R1","name":"立库 A 左排","kind":"rack","floorId":"F01","x":1,"y":0,"z":4,"dx":2,"dy":8,"dz":14,"bays":8,"levels":5,"source":"演示假设"},
+    {"id":"A-R2","name":"立库 A 右排","kind":"rack","floorId":"F01","x":5,"y":0,"z":4,"dx":2,"dy":8,"dz":14,"bays":8,"levels":5,"source":"演示假设"},
+    {"id":"SR01","name":"立库 A 堆垛机","kind":"crane","floorId":"F01","x":3.35,"y":0,"z":5,"dx":1.3,"dy":7.6,"dz":1.5,"source":"演示假设"},
+    {"id":"B-R1","name":"立库 B 左排","kind":"rack","floorId":"F01","x":11,"y":0,"z":4,"dx":2,"dy":8,"dz":14,"bays":8,"levels":5,"source":"演示假设"},
+    {"id":"B-R2","name":"立库 B 右排","kind":"rack","floorId":"F01","x":15,"y":0,"z":4,"dx":2,"dy":8,"dz":14,"bays":8,"levels":5,"source":"演示假设"},
+    {"id":"SR02","name":"立库 B 堆垛机","kind":"crane","floorId":"F01","x":13.35,"y":0,"z":5,"dx":1.3,"dy":7.6,"dz":1.5,"source":"演示假设"},
+    {"id":"RGV01","name":"RGV 侧向交接车","kind":"rgv","floorId":"F01","x":3.1,"y":0.12,"z":-0.65,"dx":1.8,"dy":0.63,"dz":1.3,"source":"建议 1 台，待验证"},
+    {"id":"T01","name":"立库 A 交接线","kind":"conveyor","floorId":"F01","x":3.35,"y":0,"z":0.65,"dx":1.3,"dy":0.75,"dz":3.35,"source":"演示假设"},
+    {"id":"T02","name":"立库 B 交接线","kind":"conveyor","floorId":"F01","x":13.35,"y":0,"z":0.65,"dx":1.3,"dy":0.75,"dz":3.35,"source":"演示假设"},
+    {"id":"C01","name":"入库输送线","label":"C01 入库","kind":"conveyor","floorId":"F01","x":0.35,"y":0,"z":-3.65,"dx":1.3,"dy":0.75,"dz":3,"source":"演示假设"},
+    {"id":"C02","name":"出库输送线","label":"C02 出库","kind":"conveyor","floorId":"F01","x":18.35,"y":0,"z":-3.65,"dx":1.3,"dy":0.75,"dz":3,"source":"演示假设"}
+  ],
+  "routes": [
+    {"name":"入库到 A","flow":"in","from":"C01","to":"T01","points":[[1,0.8,-3.65],[1,0.8,0],[4,0.8,0],[4,0.8,4]]},
+    {"name":"入库到 B","flow":"in","from":"C01","to":"T02","points":[[1,0.8,-3.65],[1,0.8,0],[14,0.8,0],[14,0.8,4]]},
+    {"name":"A 出库","flow":"out","from":"T01","to":"C02","points":[[4,0.85,4],[4,0.85,0],[19,0.85,0],[19,0.85,-3.65]]},
+    {"name":"B 出库","flow":"out","from":"T02","to":"C02","points":[[14,0.85,4],[14,0.85,0],[19,0.85,0],[19,0.85,-3.65]]}
+  ],
+  "bom": [
+    {"name":"立库 A（两排货架及堆垛机）","objectIds":["A-R1","A-R2","SR01"],"quantity":1,"unit":"组","price":null},
+    {"name":"立库 B（两排货架及堆垛机）","objectIds":["B-R1","B-R2","SR02"],"quantity":1,"unit":"组","price":null},
+    {"name":"RGV（含轨道）","objectIds":["RGV01","RAIL"],"quantity":1,"unit":"套","price":null},
+    {"name":"入库线 C01","objectIds":["C01"],"quantity":3,"unit":"米","price":null},
+    {"name":"出库线 C02","objectIds":["C02"],"quantity":3,"unit":"米","price":null},
+    {"name":"交接线 T01/T02","objectIds":["T01","T02"],"quantity":6.7,"unit":"米","price":null},
+    {"name":"控制、软件、安全与安装调试","objectIds":[],"quantity":1,"unit":"项","price":null}
+  ]
+}

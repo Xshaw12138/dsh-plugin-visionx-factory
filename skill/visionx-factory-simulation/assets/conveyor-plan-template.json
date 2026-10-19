@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "planId": "VX-CV-YYYYMMDD-XXXXXX",
+  "mode": "preview_only",
+  "status": "concept_not_simulated",
+  "input": {
+    "totalLengthM": null,
+    "segmentCount": null,
+    "direction": "+X",
+    "start": { "x": 0, "y": 0, "z": 0 },
+    "widthM": null,
+    "heightM": null,
+    "speedMps": null,
+    "nameStart": "C01"
+  },
+  "segments": [],
+  "topology": {
+    "adjacentPairs": [],
+    "internalConnectionCount": null,
+    "intentionalFreeEndpoints": 2
+  },
+  "bom": {
+    "equipmentType": "straight_bidirectional_roller_conveyor_concept",
+    "quantity": null
+  },
+  "budget": {
+    "currency": null,
+    "unitPrice": null,
+    "total": null,
+    "source": "pending"
+  },
+  "validation": {
+    "parameterValidation": "pending",
+    "connectivity": "not_applied",
+    "clearance": "not_applied",
+    "simulation": "not_run",
+    "saved": false,
+    "undoBatchConfirmed": false
+  }
+}

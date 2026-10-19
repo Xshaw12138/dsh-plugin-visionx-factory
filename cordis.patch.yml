@@ -1,0 +1,20 @@
+# dsh-plugin-visionx-factory — profile bundle patch.
+#
+# Installed through `dsh plugin --profile <name> add <this package>`; the CLI
+# appends this package to that profile's `dsh.profile.bundles` because
+# package.json declares `dsh.bundle.patch`.
+#
+# The single host-plane row below registers the bundled skill on `ctx.skills`
+# and, on first boot, provisions the matching agent preset under
+# `$DSH_HOME/.agent-presets/visionx-factory-expert/` (the user-owned preset
+# root). See README.md for the options and the uninstall steps.
+
+- insert:
+    - id: visionx-factory
+      name: 'dsh-plugin-visionx-factory'
+      # Optional: override how the agent preset is provisioned.
+      #   sync    — keep the plugin-owned copy in step with the package (default)
+      #   missing — write it only when the directory does not exist
+      #   off     — register the skill only; do not touch the preset root
+      # config:
+      #   presetInstall: sync

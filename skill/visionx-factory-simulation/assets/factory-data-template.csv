@@ -1,0 +1,2 @@
+timestamp,station,product,cycle_time_s,setup_time_s,planned_time_min,runtime_min,downtime_min,good_qty,scrap_qty,wip,buffer_capacity,from,to,distance_m,travel_time_s
+2026-01-01T08:00:00+08:00,工位01,产品A,45,0,480,430,50,1,0,2,10,上料区,工位01,12,40

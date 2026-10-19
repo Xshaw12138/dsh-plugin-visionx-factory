@@ -1,0 +1,49 @@
+{
+  "title": "三层工厂分层布局演示",
+  "isExample": true,
+  "showDownload": true,
+  "summary": "一层加工、三层组装包装、五层成品入库，通过一套垂直转运连接。",
+  "recommendation": "各楼层按工艺顺序布置，换层口设置独立交接缓存。",
+  "keyRisk": "共享垂直转运能力尚未通过节拍和排队验证。",
+  "basis": "用于验证多楼层输出结构，不代表客户工程定案。",
+  "assumptions": ["楼层净高、设备包络和换层位置均为演示假设。"],
+  "reasons": ["将换层口布置在同一竖向井道，减少楼层间绕行。"],
+  "questions": ["补充物料尺寸、峰值流量和提升设备周期。"],
+  "experiments": ["比较一台与两台提升设备，观察等待、WIP 和完成量。"],
+  "floors": [
+    {"id":"F01","name":"一层","elevation":0,"order":1,"color":"#d9eee9"},
+    {"id":"F03","name":"三层","elevation":20,"order":2,"color":"#e7edf6"},
+    {"id":"F05","name":"五层","elevation":40,"order":3,"color":"#f3ead5"}
+  ],
+  "objects": [
+    {"id":"REC-F01","name":"一层收货区","label":"收货","kind":"zone","floorId":"F01","x":0,"y":0,"z":0,"dx":5,"dy":0.2,"dz":5,"source":"演示假设"},
+    {"id":"CNC-F01","name":"一层加工区","label":"加工区","kind":"machine","floorId":"F01","x":7,"y":0,"z":0,"dx":8,"dy":2,"dz":5,"source":"演示假设"},
+    {"id":"LIFT-F01","name":"一层换层口","label":"换层口","kind":"lift","floorId":"F01","x":17,"y":0,"z":1,"dx":2,"dy":3,"dz":2,"source":"演示假设"},
+    {"id":"LIFT-F03","name":"三层换层口","label":"换层口","kind":"lift","floorId":"F03","x":17,"y":0,"z":1,"dx":2,"dy":3,"dz":2,"source":"演示假设"},
+    {"id":"ASSY-F03","name":"三层组装区","label":"组装区","kind":"station","floorId":"F03","x":7,"y":0,"z":0,"dx":8,"dy":1.2,"dz":5,"source":"演示假设"},
+    {"id":"PACK-F03","name":"三层包装区","label":"包装区","kind":"station","floorId":"F03","x":0,"y":0,"z":0,"dx":5,"dy":1.2,"dz":5,"source":"演示假设"},
+    {"id":"LIFT-F05","name":"五层换层口","label":"换层口","kind":"lift","floorId":"F05","x":17,"y":0,"z":1,"dx":2,"dy":3,"dz":2,"source":"演示假设"},
+    {"id":"ASRS-F05","name":"五层成品库","label":"成品库","kind":"rack","floorId":"F05","x":5,"y":0,"z":0,"dx":10,"dy":6,"dz":5,"bays":5,"levels":3,"source":"演示假设"}
+  ],
+  "routes": [
+    {"name":"一层入料","flow":"in","floorId":"F01","from":"REC-F01","to":"LIFT-F01","points":[[2,0.3,2],[11,0.3,2],[18,0.3,2]]},
+    {"name":"三层组装包装","flow":"in","floorId":"F03","from":"LIFT-F03","to":"PACK-F03","points":[[18,0.3,2],[11,0.3,2],[2,0.3,2]]},
+    {"name":"五层入库","flow":"out","floorId":"F05","from":"LIFT-F05","to":"ASRS-F05","points":[[18,0.3,2],[10,0.3,2]]}
+  ],
+  "verticalTransfers": [
+    {"id":"VT-01","name":"共享垂直转运","source":"演示假设","ports":[
+      {"floorId":"F01","objectId":"LIFT-F01"},
+      {"floorId":"F03","objectId":"LIFT-F03"},
+      {"floorId":"F05","objectId":"LIFT-F05"}
+    ]}
+  ],
+  "processFlows": [
+    {"id":"PF-01","name":"加工到组装包装","steps":[
+      {"type":"object","id":"REC-F01"},{"type":"object","id":"LIFT-F01"},{"type":"transfer","id":"VT-01"},
+      {"type":"object","id":"LIFT-F03"},{"type":"object","id":"PACK-F03"},{"type":"object","id":"LIFT-F03"},
+      {"type":"transfer","id":"VT-01"},{"type":"object","id":"LIFT-F05"},{"type":"object","id":"ASRS-F05"}
+    ]}
+  ],
+  "storage": [],
+  "bom": []
+}
